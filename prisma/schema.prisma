@@ -1,0 +1,29 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  title     String
+  desc      String
+  image     String?  // URL atau path gambar yang diupload
+  tech      String
+  bg        String   // Bisa berupa URL atau path gambar
+  slug      String   @unique
+  category  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
